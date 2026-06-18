@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>icdwise — verified ICD-10-CM code lookup for AI agents</title>
+<meta name="description" content="icdwise gives AI agents the official description of ICD-10-CM diagnosis codes, validates whether a code is real, and finds codes by condition — from the public-domain U.S. code set, not guesses. MCP server + TypeScript library by Qiniso." />
+<link rel="icon" href="logo.svg" type="image/svg+xml" />
+<style>
+  :root {
+    --emerald: #10b981; --emerald-dark: #047857; --ink: #0b1220; --muted: #5b6472;
+    --bg: #ffffff; --card: #f6f8f7; --line: #e3e8e5;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: var(--bg); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 72px 0 40px; text-align: center; }
+  .logo { width: 84px; height: 84px; }
+  h1 { font-size: 2.6rem; margin: 18px 0 6px; letter-spacing: -0.02em; }
+  .tag { font-size: 1.18rem; color: var(--emerald-dark); font-weight: 600; margin: 0 0 14px; }
+  .lede { font-size: 1.12rem; color: var(--muted); max-width: 640px; margin: 0 auto 26px; }
+  .cta { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .btn { display: inline-block; padding: 11px 20px; border-radius: 10px; font-weight: 600; text-decoration: none; }
+  .btn-primary { background: linear-gradient(135deg, var(--emerald), var(--emerald-dark)); color: #fff; }
+  .btn-ghost { border: 1px solid var(--line); color: var(--ink); }
+  section { padding: 36px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.5rem; letter-spacing: -0.01em; }
+  .stat { display: flex; gap: 28px; flex-wrap: wrap; margin: 18px 0; }
+  .stat div { flex: 1 1 200px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  .stat b { display: block; font-size: 2rem; color: var(--emerald-dark); line-height: 1.1; }
+  .stat b.bad { color: #c0392b; }
+  .stat span { color: var(--muted); font-size: 0.95rem; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--ink); color: #e6edf3; padding: 16px 18px; border-radius: 10px; overflow-x: auto; font-size: 0.9rem; }
+  table { width: 100%; border-collapse: collapse; margin-top: 18px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); font-size: 0.95rem; vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  td.bad { color: #c0392b; } td.good { color: var(--emerald-dark); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 16px; }
+  .mod { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .mod h3 { margin: 0 0 4px; font-size: 1.02rem; }
+  .mod p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+  footer { color: var(--muted); font-size: 0.9rem; text-align: center; padding: 40px 0 64px; border-top: 1px solid var(--line); }
+  a { color: var(--emerald-dark); }
+  .note { color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" src="logo.svg" alt="Qiniso" />
+    <h1>icdwise</h1>
+    <p class="tag">Verified ICD-10-CM code lookup &amp; validation for AI agents.</p>
+    <p class="lede">Ask an LLM what an ICD-10 code means and it answers confidently — and often wrongly: wrong laterality, wrong severity, wrong condition, and it will invent a description for a code that doesn't exist. icdwise looks the code up in the official U.S. code set and returns the real description, or an honest "not found". <em>"Qiniso" means "truth" in Zulu.</em></p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#add">Add to Claude</a>
+      <a class="btn btn-ghost" href="https://github.com/qinisolabs/icdwise">GitHub</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>Why it exists</h2>
+    <p>ICD-10-CM has ~74,000 highly specific codes — the exact wording encodes laterality, severity, and encounter type, and the set changes every year. That is precisely the kind of large, exact, shifting reference data a language model cannot recall reliably; it pattern-matches a plausible description and states it with full confidence. For coding, billing, or clinical documentation, a silently wrong description is a real problem.</p>
+    <div class="stat">
+      <div><b class="bad">~38%</b><span>of real ICD-10-CM codes a frontier LLM described <strong>wrong</strong>, cold — and it fabricated descriptions for codes that don't exist. icdwise: 0%.</span></div>
+      <div><b>~74k</b><span>official codes (NCHS/CMS), with the official description for each.</span></div>
+      <div><b>0</b><span>guesses — unknown codes return an honest "not found", never an invented description.</span></div>
+    </div>
+    <table>
+      <thead><tr><th>Code</th><th class="bad">LLM said (cold)</th><th class="good">Official (icdwise)</th></tr></thead>
+      <tbody>
+        <tr><td>H40.1131</td><td class="bad">"severe stage, right eye"</td><td class="good">Primary open-angle glaucoma, bilateral, <strong>mild</strong> stage</td></tr>
+        <tr><td>T63.011A</td><td class="bad">"ingested mushrooms"</td><td class="good">Toxic effect of <strong>rattlesnake venom</strong>, accidental, initial encounter</td></tr>
+        <tr><td>S52.521A</td><td class="bad">"displaced shaft, left arm"</td><td class="good"><strong>Torus</strong> fracture of lower end of <strong>right</strong> radius, initial encounter</td></tr>
+        <tr><td>J45.999 (fake)</td><td class="bad">"Other asthma"</td><td class="good">not a valid code</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Method: real ICD-10-CM codes (common → obscure) plus well-formed fakes, asked of a frontier model with no tools, scored against the official descriptions (NIH Clinical Tables / CMS). ~38% of real codes wrong, plus fabrication on fakes and a false rejection of a real code. icdwise returns the official text by lookup, so it is correct by construction; reproduce it with the harness in the repo (<code>bench/</code>).</p>
+  </section>
+
+  <section>
+    <h2>Tools</h2>
+    <div class="grid">
+      <div class="mod"><h3>lookup_icd10</h3><p>The official description of a code, plus its canonical dotted form and 3-char category. Accepts E11.9 or E119.</p></div>
+      <div class="mod"><h3>validate_icd10</h3><p>Is this a real code? Well-formed <em>and</em> present in the official set — catches fabricated or retired codes.</p></div>
+      <div class="mod"><h3>search_icd10</h3><p>Reverse lookup: find the code(s) for a condition by keywords, e.g. "generalized anxiety".</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Use it</h2>
+    <p class="lead">As a library:</p>
+<pre>npm i icdwise
+
+import { lookupIcd10, validateIcd10, searchIcd10 } from "icdwise";
+
+lookupIcd10("E11.9").description;    // "Type 2 diabetes mellitus without complications"
+validateIcd10("E11.99").valid;       // false — well-formed but not a real code
+searchIcd10("generalized anxiety");  // → [{ code: "F41.1", ... }]</pre>
+  </section>
+
+  <section id="add">
+    <h2>Add it to Claude</h2>
+    <p>Settings → Connectors → <strong>Add custom connector</strong>, and paste — hosted on the edge, no login, no key:</p>
+    <pre>https://icdwise.qinisolabs.workers.dev/mcp</pre>
+    <h2 style="margin-top:30px">Or run it locally</h2>
+    <p>Add this under <code>mcpServers</code> in your client config and restart:</p>
+    <pre>{
+  "mcpServers": {
+    "icdwise": { "command": "npx", "args": ["-y", "icdwise"] }
+  }
+}</pre>
+  </section>
+
+  <section>
+    <h2>What it is <em>not</em></h2>
+    <p class="lead">icdwise looks up and validates codes against the official <strong>ICD-10-CM</strong> (U.S. Clinical Modification) set. It is <strong>not medical advice</strong>, not a determination of billability or coverage, and not ICD-10 (WHO) or ICD-11. Unknown codes return an honest "not found" — never a fabricated description.</p>
+  </section>
+
+</div>
+
+<footer>
+  icdwise — verified, trustworthy data tools for AI agents.<br />
+  Open source · <a href="https://github.com/qinisolabs/icdwise">github.com/qinisolabs/icdwise</a> ·
+  <a href="https://www.npmjs.com/package/icdwise">npm</a> ·
+  <a href="https://github.com/qinisolabs">Qiniso</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+icdwise
+Copyright 2026 Qiniso
+
+ICD-10-CM (International Classification of Diseases, 10th Revision, Clinical
+Modification) is produced by the U.S. National Center for Health Statistics
+(NCHS) and the Centers for Medicare & Medicaid Services (CMS), and is in the
+public domain in the United States.
+
+- The bundled code descriptions are sourced from the CMS ICD-10-CM release and
+  the NIH Clinical Tables Search Service (clinicaltables.nlm.nih.gov), both
+  public-domain U.S. government data.
+- The full code set is generated into data/icd10cm-codes.json via
+  scripts/build-data.mjs (see README).
+
+icdwise validates and describes codes; it is not medical advice and does not
+determine billability, coverage, or clinical appropriateness.

@@ -1,0 +1,30 @@
+# icdwise
+
+> Verified ICD-10-CM diagnosis-code lookup & validation for AI agents. Returns the OFFICIAL
+> description of a code, confirms whether a code is real, or finds the code for a condition —
+> from the U.S. public-domain ICD-10-CM code set, not the model's memory. Ships as an MCP server
+> and a typed TypeScript library. By Qiniso — verified, trustworthy data tools for AI agents.
+
+## What it does
+- lookup_icd10: official description of an ICD-10-CM code (+ canonical dotted form, 3-char category). Accepts E11.9 or E119.
+- validate_icd10: is a code real? (well-formed AND present in the official set). Catches fabricated/retired codes.
+- search_icd10: reverse lookup — find code(s) for a condition by keywords (e.g. "type 2 diabetes").
+
+## Why
+LLMs confidently misdescribe ICD-10 codes (wrong laterality/severity/condition) and invent descriptions for codes that don't exist. On a step-0 eval, a frontier model was ~38% wrong on real codes and fabricated a description for a fake code. icdwise returns the official text or an honest "not found" — never a guess.
+
+## Data
+U.S. public-domain ICD-10-CM (NCHS/CMS), full code set (~74k) generated from the official CMS release; descriptions are the official text. Every response reports its datasetVersion.
+
+## Scope
+ICD-10-CM (U.S. Clinical Modification) only — not ICD-10 (WHO) or ICD-11. Not medical advice; does not determine billability or coverage. No network calls (library).
+
+## Install
+- Hosted MCP (add custom connector): https://icdwise.qinisolabs.workers.dev/mcp  (tools: lookup_icd10, validate_icd10, search_icd10)
+- Local MCP: npx -y icdwise
+- Library: npm install icdwise
+
+## Links
+- Repo: https://github.com/qinisolabs/icdwise
+- npm: https://www.npmjs.com/package/icdwise
+- License: Apache-2.0

@@ -1,0 +1,14 @@
+# Cloudflare Worker deploy config for the hosted (edge) endpoint.
+# Requires wrangler: `npm i -g wrangler` (or use `npx wrangler`). Deploy: `wrangler deploy`.
+# Free tier: 100k requests/day. wrangler bundles the TS entry (esbuild) and inlines
+# the generated ICD-10-CM dataset, so no node:fs is needed at the edge.
+name = "icdwise"
+main = "src/worker.ts"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Regenerate the data module before bundling (same as `npm run gen`).
+[build]
+command = "node scripts/gen-data.mjs"
+
+# After deploy the endpoint is:  https://icdwise.qinisolabs.workers.dev/mcp

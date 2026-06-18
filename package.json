@@ -1,0 +1,47 @@
+{
+  "name": "icdwise",
+  "version": "0.1.1",
+  "mcpName": "io.github.qinisolabs/icdwise",
+  "description": "Verified ICD-10-CM code lookup & validation for AI agents — official descriptions, not guesses.",
+  "license": "Apache-2.0",
+  "author": "Qiniso",
+  "homepage": "https://github.com/qinisolabs/icdwise#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/qinisolabs/icdwise.git" },
+  "bugs": { "url": "https://github.com/qinisolabs/icdwise/issues" },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "bin": { "icdwise-mcp": "dist/server.js" },
+  "files": ["dist", "README.md", "LICENSE", "NOTICE"],
+  "engines": { "node": ">=18" },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "agents",
+    "llm",
+    "icd-10",
+    "icd10",
+    "icd-10-cm",
+    "medical-coding",
+    "diagnosis-codes",
+    "healthcare"
+  ],
+  "scripts": {
+    "gen": "node scripts/gen-data.mjs",
+    "build": "npm run gen && tsc",
+    "start": "node dist/server.js",
+    "test": "npm run gen && tsx test/parity.test.ts",
+    "deploy": "wrangler deploy",
+    "build-data": "node scripts/build-data.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "tsx": "^4.16.0",
+    "@types/node": "^20.14.0"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "_comment": "Recorded step-0 eval. 'official' is the authoritative description from the NIH Clinical Tables Search Service (clinicaltables.nlm.nih.gov), or null for a non-existent/retired code. 'llm' is a frontier model's cold, tool-free answer; 'llmCorrect' is the manual judgement. icdwise returns 'official' by lookup (or a correct 'not valid' when official is null), so it is correct by construction.",
+  "items": [
+    { "code": "E11.9", "official": "Type 2 diabetes mellitus without complications", "llm": "Type 2 diabetes mellitus without complications", "llmCorrect": true },
+    { "code": "H40.1131", "official": "Primary open-angle glaucoma, bilateral, mild stage", "llm": "Primary open-angle glaucoma, severe stage, right eye", "llmCorrect": false },
+    { "code": "M54.5", "official": null, "llm": "Low back pain", "llmCorrect": false, "note": "Retired as a leaf code in 2021 (split into M54.50/51/59)" },
+    { "code": "V97.33XD", "official": "Sucked into jet engine, subsequent encounter", "llm": "not a valid code", "llmCorrect": false, "note": "Real code; model false-rejected it" },
+    { "code": "S52.521A", "official": "Torus fracture of lower end of right radius, initial encounter for closed fracture", "llm": "Displaced fracture of shaft of radius, left arm, initial encounter for closed fracture", "llmCorrect": false },
+    { "code": "J45.999", "official": null, "llm": "Other asthma", "llmCorrect": false, "note": "Fake code; model fabricated a description" },
+    { "code": "I10", "official": "Essential (primary) hypertension", "llm": "Essential (primary) hypertension", "llmCorrect": true },
+    { "code": "C50.911", "official": "Malignant neoplasm of unspecified site of right female breast", "llm": "Malignant neoplasm of unspecified site of right female breast", "llmCorrect": true },
+    { "code": "E11.99", "official": null, "llm": "not a valid code", "llmCorrect": true },
+    { "code": "G47.33", "official": "Obstructive sleep apnea (adult) (pediatric)", "llm": "Obstructive sleep apnea (adult) (pediatric)", "llmCorrect": true },
+    { "code": "W55.41XA", "official": "Bitten by pig, initial encounter", "llm": "Bitten by pig, initial encounter", "llmCorrect": true },
+    { "code": "T63.011A", "official": "Toxic effect of rattlesnake venom, accidental (unintentional), initial encounter", "llm": "Toxic effect of ingested mushrooms, accidental (unintentional), initial encounter", "llmCorrect": false },
+    { "code": "F32.9", "official": "Major depressive disorder, single episode, unspecified", "llm": "Major depressive disorder, single episode, unspecified", "llmCorrect": true },
+    { "code": "S52.999A", "official": null, "llm": "not a valid code", "llmCorrect": true },
+    { "code": "O80", "official": "Encounter for full-term uncomplicated delivery", "llm": "Encounter for full-term uncomplicated delivery", "llmCorrect": true },
+    { "code": "M54.50", "official": "Low back pain, unspecified", "llm": "Low back pain", "llmCorrect": true }
+  ]
+}
