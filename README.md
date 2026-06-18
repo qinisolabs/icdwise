@@ -8,7 +8,7 @@
 
 *Verified, trustworthy data tools for AI agents. "Qiniso" means "truth" in Zulu.*
 
-[Website](https://qinisolabs.github.io/icdwise/) · [MCP endpoint](https://icdwise.qinisolabs.workers.dev/mcp) · [MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=icdwise)
+[Website](https://qinisolabs.github.io/icdwise/) · [npm](https://www.npmjs.com/package/icdwise) · [MCP endpoint](https://icdwise.qinisolabs.workers.dev/mcp) · [MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=icdwise)
 
 </div>
 

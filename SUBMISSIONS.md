@@ -10,11 +10,11 @@ Status of every place icdwise should appear. Verify live listings — don't assu
 
 | Channel | Type | Status | Checked | Notes |
 | --- | --- | --- | --- | --- |
-| Full dataset loaded | data | ⏳ REQUIRED before publish | — | run `npm run build-data <CMS file>` (see PUBLISH.md §0) |
-| npm | publish | ⏳ to do | — | unscoped `icdwise`; scope fallback if 403 |
-| GitHub repo + Pages | publish | ⏳ to do | — | topics + homepage; enable Pages /docs |
-| Official MCP Registry | publish | ⏳ to do | — | io.github.qinisolabs/icdwise |
-| Cloudflare Worker | deploy | ⏳ to do | — | icdwise.qinisolabs.workers.dev/mcp |
+| Full dataset loaded | data | ✅ done (74,706 codes, FY2026) | 2026-06-18 | CMS April 1 2026 Code Descriptions |
+| npm | publish | ✅ live (0.1.1) | 2026-06-18 | unscoped `icdwise` |
+| GitHub repo + Pages | publish | ✅ live (Pages building) | 2026-06-18 | topics + homepage set |
+| Official MCP Registry | publish | ✅ live (0.1.1) | 2026-06-18 | io.github.qinisolabs/icdwise |
+| Cloudflare Worker | deploy | ✅ live | 2026-06-18 | /mcp verified (T63.011A → rattlesnake venom) |
 | Glama | auto-ingest / claim | ⏳ pending — verify | — | claim via qinisolabs GitHub, **no billing** |
 | mcp.so | auto-ingest / form | ⏳ pending — verify | — | |
 | PulseMCP | auto-ingest | ⏳ pending — verify | — | |
