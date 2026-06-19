@@ -16,7 +16,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
 const stage = join(tmpdir(), `mcpb-${pkg.name}-${process.pid}`);
 const outDir = join(root, "dist-mcpb");
-const out = join(outDir, `${pkg.name}.mcpb`); // stable name (version lives in the manifest) for a permanent release-download link
+const safeName = pkg.name.replace(/^@[^/]+\//, ""); // drop npm scope (@qinisolabs/) so the file isn't nested
+const out = join(outDir, `${safeName}.mcpb`); // stable, scope-stripped name (version lives in the manifest)
 
 if (!existsSync(join(root, "dist"))) {
   console.error("dist/ not found — run `npm run build` first.");
