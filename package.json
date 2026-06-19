@@ -30,6 +30,7 @@
   "scripts": {
     "gen": "node scripts/gen-data.mjs",
     "build": "npm run gen && tsc",
+    "build-mcpb": "npm run build && node scripts/build-mcpb.mjs",
     "start": "node dist/server.js",
     "test": "npm run gen && tsx test/parity.test.ts",
     "deploy": "wrangler deploy",

@@ -1,0 +1,40 @@
+{
+  "manifest_version": "0.3",
+  "name": "icdwise",
+  "display_name": "icdwise — ICD-10-CM medical codes",
+  "version": "0.1.1",
+  "description": "Verified ICD-10-CM medical code lookup, validation & reverse search for AI agents — not guesses.",
+  "long_description": "Look up, validate, and reverse-search ICD-10-CM medical diagnosis codes against the official code set (~74k codes) — get the official description for a code, confirm a code is valid, or find codes by description, with an honest \"not found\" instead of a fabricated code. All data bundled, runs locally, no key.",
+  "author": {
+    "name": "Qiniso",
+    "url": "https://github.com/qinisolabs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qinisolabs/icdwise"
+  },
+  "homepage": "https://qinisolabs.github.io/icdwise",
+  "documentation": "https://qinisolabs.github.io/icdwise",
+  "support": "https://github.com/qinisolabs/icdwise/issues",
+  "license": "Apache-2.0",
+  "keywords": ["icd-10", "icd-10-cm", "medical-codes", "healthcare", "diagnosis"],
+  "server": {
+    "type": "node",
+    "entry_point": "server/server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/server.js"],
+      "env": {}
+    }
+  },
+  "tools": [
+    { "name": "lookup_icd10", "description": "Get the official description for an ICD-10-CM code." },
+    { "name": "validate_icd10", "description": "Check whether an ICD-10-CM code is valid." },
+    { "name": "search_icd10", "description": "Find ICD-10-CM codes by description (reverse lookup)." }
+  ],
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "node": ">=18.0.0" }
+  }
+}

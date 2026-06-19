@@ -4,3 +4,5 @@ dist/
 .env
 .DS_Store
 src/data.generated.ts
+dist-mcpb/
+mcpb-build/
