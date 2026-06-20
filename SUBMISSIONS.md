@@ -18,7 +18,7 @@ Status of every place icdwise should appear. Verify live listings — don't assu
 | Glama | auto-ingest / claim | ⏳ pending — verify | — | claim via qinisolabs GitHub, **no billing** |
 | mcp.so | auto-ingest / form | ⏳ pending — verify | — | |
 | PulseMCP | auto-ingest | ⏳ pending — verify | — | |
-| awesome-mcp-servers | **manual PR** | ⏳ to do | — | punkpeye/awesome-mcp-servers |
+| awesome-mcp-servers | **manual PR** | ✅ merged | 2026-06-19 | merged into punkpeye/awesome-mcp-servers |
 | Launch post | manual | ⏳ when ready | — | lead with "LLMs misdescribe ICD-10 ~38% of the time; icdwise 0%" |
 
 Legend: ✅ done & verified · ⏳ pending · ➖ skip.
