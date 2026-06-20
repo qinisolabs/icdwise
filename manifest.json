@@ -17,6 +17,7 @@
   "documentation": "https://qinisolabs.github.io/icdwise",
   "support": "https://github.com/qinisolabs/icdwise/issues",
   "license": "Apache-2.0",
+  "privacy_policies": ["https://qinisolabs.github.io/privacy.html"],
   "keywords": ["icd-10", "icd-10-cm", "medical-codes", "healthcare", "diagnosis"],
   "server": {
     "type": "node",

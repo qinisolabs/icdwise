@@ -63,8 +63,17 @@ function inputSchema(t: ToolSpec) {
   }
   return { type: "object", properties, required, additionalProperties: false };
 }
+// Human-readable Title Case for a tool name, uppercasing known acronyms — used for the
+// `title` + `readOnlyHint` tool annotations the Claude connector directory requires.
+const ACRONYMS = new Set(["iban","vat","vin","gtin","upc","ean","isbn","isbn10","issn","icd10","orcid","gln","sscc","imei","isin","cusip","sedol","lei","aba","eth","btc","tld","url","uuid","ip","id","dni","cpf","cnpj","pesel","bsn","nrn","nif","pt","sa","tckn","ric","rc","nir","ahv","curp","cnp","egn","de","fr","ch","mx","hr","ro","bg","ee","cz","uk","us","eu","sic","icd","fcdo"]);
+export function humanizeTitle(name: string): string {
+  return name.split("_").map((w) => (ACRONYMS.has(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(" ");
+}
+export function toolAnnotations(name: string) {
+  return { title: humanizeTitle(name), readOnlyHint: true };
+}
 export function listTools() {
-  return TOOLS.map((t) => ({ name: t.name, description: t.description, inputSchema: inputSchema(t) }));
+  return TOOLS.map((t) => ({ name: t.name, description: t.description, inputSchema: inputSchema(t), annotations: toolAnnotations(t.name) }));
 }
 export function callTool(name: string, args: Record<string, unknown> | undefined) {
   const t = TOOLS.find((x) => x.name === name);

@@ -73,6 +73,10 @@ npm run build
 npm test
 ```
 
+## Privacy
+
+This tool runs locally on your machine and is built not to collect, store, or transmit your data — no analytics, no telemetry, no account. All reference data is bundled — no network calls, and nothing leaves your device. Full policy: <https://qinisolabs.github.io/privacy.html>.
+
 ## License
 
 Apache-2.0. ICD-10-CM data is U.S. public domain (NCHS/CMS); see `NOTICE`.

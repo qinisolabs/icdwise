@@ -2,7 +2,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z, type ZodTypeAny } from "zod";
-import { TOOLS, SERVER_INFO, type ToolArg } from "./core.js";
+import { TOOLS, SERVER_INFO, toolAnnotations, type ToolArg } from "./core.js";
 
 const server = new McpServer({ name: SERVER_INFO.name, version: SERVER_INFO.version });
 
@@ -18,7 +18,7 @@ function json(data: unknown) {
 for (const t of TOOLS) {
   const shape: Record<string, ZodTypeAny> = {};
   for (const a of t.args) shape[a.name] = zodFor(a);
-  server.tool(t.name, t.description, shape, async (args) => {
+  server.tool(t.name, t.description, shape, toolAnnotations(t.name), async (args) => {
     try {
       return json(t.run(args as Record<string, unknown>));
     } catch (err) {
