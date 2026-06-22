@@ -1,6 +1,6 @@
 {
   "name": "icdwise",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "mcpName": "io.github.qinisolabs/icdwise",
   "description": "Verified ICD-10-CM code lookup & validation for AI agents — official descriptions, not guesses.",
   "license": "Apache-2.0",

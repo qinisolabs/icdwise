@@ -47,7 +47,7 @@ export const TOOLS: ToolSpec[] = [
   },
 ];
 
-export const SERVER_INFO = { name: "icdwise", version: "0.1.0" } as const;
+export const SERVER_INFO = { name: "icdwise", version: "0.1.2" } as const;
 export const PUBLIC_BASE = "https://qinisolabs.github.io/icdwise";
 const DEFAULT_PROTOCOL = "2025-06-18";
 
@@ -72,8 +72,15 @@ export function humanizeTitle(name: string): string {
 export function toolAnnotations(name: string) {
   return { title: humanizeTitle(name), readOnlyHint: true };
 }
+// Mirror every tool's JSON result into `structuredContent` so MCP clients get a
+// typed object, not just text. Permissive-but-honest schema (results vary by tool).
+const OUTPUT_SCHEMA = {
+  type: "object",
+  description: "Deterministic result object, identical to the JSON in the text payload and mirrored in `structuredContent`.",
+  additionalProperties: true,
+} as const;
 export function listTools() {
-  return TOOLS.map((t) => ({ name: t.name, description: t.description, inputSchema: inputSchema(t), annotations: toolAnnotations(t.name) }));
+  return TOOLS.map((t) => ({ name: t.name, description: t.description, inputSchema: inputSchema(t), outputSchema: OUTPUT_SCHEMA, annotations: toolAnnotations(t.name) }));
 }
 export function callTool(name: string, args: Record<string, unknown> | undefined) {
   const t = TOOLS.find((x) => x.name === name);
@@ -87,7 +94,11 @@ export function callTool(name: string, args: Record<string, unknown> | undefined
     const v = args?.[arg.name];
     a[arg.name] = v === undefined || v === null ? undefined : arg.type === "number" ? Number(v) : String(v);
   }
-  return { content: [{ type: "text", text: JSON.stringify(t.run(a), null, 2) }] };
+  const result = t.run(a);
+  return {
+    content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+    structuredContent: result as Record<string, unknown>,
+  };
 }
 
 interface JsonRpcMessage {
